@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <style>
+        .form {
+            border: black;
+            border-radius: 10px;
+            background-color: gainsboro;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .fieldset {
+            border: black;
+            border-radius: 10px;
+            background-color: rgb(99, 116, 101);
+            border-color: black;
+            border-style: double;
+        }
+
+        .input {
+            border: 4px solid rgb(78, 76, 76);
+            border-radius: 2px;
+            width: 30%;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        function search() {
+            let name = document.getElementById("empname").value;
+            let name2 = document.getElementsByName("name1");
+            let data = JSON.parse(localStorage.getItem("user1"));
+            // let array = [name];
+
+            if (name == "") {
+                alert("Please Enter Valide Search Value");
+            } else {
+                for (let i = 0; i < data.length; i++) {
+                    console.log(data);
+                    let values = Object.values(data[i]);
+                    for (let j = 0; j < values.length; j++) {
+                        if (values[j] == name) {
+                            for (let a = 0; a < values.length; a++) {
+                                name2[a].value = values[a];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+        var Gujarat = ["Ahmedabad", "Amreli"];
+        // var MadyaPradesh =  ["Ahmednagar", "Akola", "Amravati"];
+        var Maharashtra = ["Ahmednagar", "Akola", "Amravati"];
+        var Rajasthan = ["Ajmer", "Alwar", "Banswara"];
+        var Punjab = ["Amritsar", "Barnala", "Bathinda"];
+
+        function ch() {
+            var StateSelected = document.getElementById('inputState').value;
+            console.log(optionsList);
+            var optionsList = StateSelected;
+            var htmlString = "";
+
+            switch (StateSelected) {
+                case "Gujarat":
+                    optionsList = Gujarat;
+                    break;
+
+                case "Punjab":
+                    optionsList = Punjab;
+                    break;
+
+                case "Maharashtra":
+                    optionsList = Maharashtra;
+                    break;
+
+                case "Rajasthan":
+                    optionsList = Rajasthan;
+                    break;
+            }
+
+            for (var i = 0; i < optionsList.length; i++) {
+                htmlString = htmlString + "<option value='" + optionsList[i] + "'>" + optionsList[i] + "</option>";
+            }
+            document.getElementById('inputCity').innerHTML = htmlString;
+        }
+
+
+
+
+
+        function validation1() {
+            // var x = 0;
+            //name
+            document.getElementById("empname1-err").innerHTML = "";
+            document.getElementById("empemail1-err").innerHTML = "";
+            document.getElementById("empnumber1-err").innerHTML = "";
+            document.getElementById("empcode1-err").innerHTML = "";
+            document.getElementById("country1-err").innerHTML = "";
+            document.getElementById("inputState-err").innerHTML = "";
+            document.getElementById("inputCity-err").innerHTML = "";
+
+            var empname1 = document.getElementById("empname1").value;
+            var empemail1 = document.getElementById("empemail1").value;
+            var empnumber1 = document.getElementById("empnumber1").value;
+            var empcode1 = document.getElementById("empcode1").value;
+
+            var country1 = document.getElementById("country1").value;
+            var inputState = document.getElementById("inputState").value;
+            var inputCity = document.getElementById("inputCity").value;
+
+
+            if (empname1 == "") {
+                document.getElementById('empname1-err').innerHTML = "Please Enter Employee Full Name <br>";
+                return false;
+                // x = 1;
+            } else if (!empname1.match(/^[A-Z]*$/)) {
+                document.getElementById('empname1-err').innerHTML = "Please Enter Name In Upercase <br>";
+                return false;
+                // x = 1;
+            }
+            // else  {
+            //   document.getElementById('empname1-err').innerHTML = "";
+            // }
+            //Email
+            else if (empemail1 == "") {
+                document.getElementById('empemail1-err').innerHTML = "Please Enter Email-Id <br>";
+                // x = 1;
+            } else if (!empemail1.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+                document.getElementById('empemail1-err').innerHTML = " Please Insert Valid Email-Id  <br>";
+                // x = 1;
+            }
+            // else {
+            //   document.getElementById('empemail1-err').innerHTML = "";
+            // }
+            //Mo-No
+            else if (empnumber1 == "") {
+                document.getElementById("empnumber1-err").innerHTML = "Please Enter Mobile Number <br>";
+                // x = 1;
+            } else if (!empnumber1.match(/^[0-9]{10}$/)) {
+                document.getElementById("empnumber1-err").innerHTML = "Mobile Number Should Be 10 Digets  <br>";
+                // x = 1;
+            }
+            // else {
+            //   document.getElementById('empnumber1-err').innerHTML = "";
+            // }
+            //Employeecode
+            else if (empcode1 == "") {
+                document.getElementById("empcode1-err").innerHTML = "Please Enter Employeecode <br>";
+                // x = 1;
+            } else if (!empcode1.match(/^[A-Z]{4}[0-9]{3}$/)) {
+
+                document.getElementById('empcode1-err').innerHTML = "Employeecode First 4 String in Upercase and last 3 Digits";
+            }
+            // else {
+            //   document.getElementById('empcode1-err').innerHTML = "";
+            // }
+
+            // else if (gen == "") {
+            //   document.getElementById("gen-err").innerHTML = "Please Select Gender <br>";
+            // //   // x = 1;
+            // }
+            else if (country1 == "") {
+                document.getElementById("country1-err").innerHTML = "Please Select Country<br>";
+                // x = 1;
+            }
+
+
+
+
+            // else {
+            //   document.getElementById('country1-err').innerHTML = "";
+            // }
+            //State
+            else if (inputState == "") {
+                document.getElementById("inputState-err").innerHTML = "Please Select State <br>";
+                // x = 1;
+            }
+            // else {
+            //   document.getElementById('inputState-err').innerHTML = "";
+            // }
+            // //City
+            else if (inputCity == "") {
+                document.getElementById("inputCity-err").innerHTML = "Please Select City <br>";
+                // x = 1;
+            } else {
+
+                let empname1 = document.getElementById("empname1").value;
+                let empemail1 = document.getElementById("empemail1").value;
+                let empnumber1 = document.getElementById("empnumber1").value;
+                let empcode1 = document.getElementById("empcode1").value;
+                let gender1 = document.getElementById("gender1").value;
+                let country1 = document.getElementById("country1").value;
+                // let state1 = document.getElementById("state1").value;
+                let inputState = document.getElementById("inputState").value;
+                // let city1 = document.getElementById("city1").value;
+                let inputCity = document.getElementById("inputCity").value;
+                let storedata = localStorage.getItem("user1") ? JSON.parse(localStorage.getItem("user1")) : []
+                storedata.push({
+                    "empname1": empname1,
+                    "empemail1": empemail1,
+                    "empnumber1": empnumber1,
+                    "empcode1": empcode1,
+                    "gender1": gender1,
+                    "country1": country1,
+                    // "state1": state1,
+                    "inputState": inputState,
+                    // "city1": city1,
+                    "inputCity": inputCity
+
+
+                });
+
+                // storedata.push(object);
+                localStorage.setItem("user1", JSON.stringify(storedata));
+                //    localStorage.clear();
+            }
+        }
+        // function store() {
+        // let empname1 = document.getElementById("empname1").value;
+        // let empemail1 = document.getElementById("empemail1").value;
+        // let empnumber1 = document.getElementById("empnumber1").value;
+        // let empcode1 = document.getElementById("empcode1").value;
+        // let country1 = document.getElementById("country1").value;
+        // // let state1 = document.getElementById("state1").value;
+        // let inputState = document.getElementById("inputState").value;
+        // // let city1 = document.getElementById("city1").value;
+        // let inputCity = document.getElementById("inputCity").value;
+        // let gen = document.getElementById("gen").value;
+        // // let gen = document.getElementById("gen").value;
+        // let storedata = localStorage.getItem("user1") ? JSON.parse(localStorage.getItem("user1")) : []
+        // storedata.push({
+        //   "empname1": empname1,
+        //   "empemail1": empemail1,
+        //   "empnumber1": empnumber1,
+        //   "gen": gen,
+        //   "empcode1": empcode1,
+        //   "country1": country1,
+        //   // "state1": state1,
+        //   "inputState": inputState,
+        //   // "city1": city1,
+        //   "inputCity": inputCity
+
+        //   // "gen": gen
+        // });
+
+        // // storedata.push(object);
+        // localStorage.setItem("user1", JSON.stringify(storedata));
+        // //    localStorage.clear();
+        // }
+    </script>
+    <!-- <script src="employee.js"></script> -->
+</head>
+
+<body>
+    <form class="mt-5">
+
+        <!-- form 1 Start -->
+        <div class="fieldset m-5">
+            <div class="row text-center h2 text-light">
+                <label>Employee Registration Form</label>
+            </div>
+            <div class="bg-warning rounded mb-3">
+                <div class="row p-3">
+                    <div class="col-lg-2 col-sm-12">
+                        <label>Full Name:</label>
+                    </div>
+                    <div class="col-lg-10 col-sm-12">
+                        <input class="input" type="text" id="empname1" placeholder="Enter Employee Full Name" />
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-lg-2">
+                        <label>Email Address:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input class="input" type="email" id="empemail1" placeholder="Enter Employee Email" />
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-lg-2">
+                        <label>Mobile Number:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input class="input" type="text" id="empnumber1" placeholder="Enter Employee Mobile Number" />
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-lg-2">
+                        <label>Emp Code:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input class="input" type="text" id="empcode1" placeholder="Enter Employee Code" />
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-lg-2">
+                        <label>Gender:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <select class="input" name="gender1" id="gender1">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-lg-2">
+                        <label>Country:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input class="input" type="text" id="country1" placeholder="Enter Employee country"
+                            value="India" disabled /> </select>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-lg-2">
+                        <label for="inputState">State</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <select class="input" id="inputState" onchange="ch()">
+                            <option value="">Select State</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-lg-2">
+                        <label for="inputCity">City</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <select class="input" id="inputCity">
+                            <option value="">-- select one -- </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Errors -->
+                <div class="row">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-10">
+                        <span id="empname1-err"></span>
+                        <span id="empemail1-err"></span>
+                        <span id="empnumber1-err"></span>
+                        <span id="empcode1-err"></span>
+                        <span id="gender1-err">
+                            <span id="country1-err"></span>
+                            <span id="inputState-err"></span>
+                            <span id="inputCity-err"></span>
+                    </div>
+                </div>
+                <!-- submit Button -->
+                <div class="row p-3">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="button" class="input bg-dark text-light" id="btn2" value="SUBMIT"
+                            onclick="validation1()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- form 1 End -->
+
+        <div>
+            <div>
+                <div class="fieldset m-5">
+                    <div class="row text-center h2 text-light">
+                        <label>Employee Registration Form</label>
+                    </div>
+                    <div class="bg-warning rounded mb-3">
+                        <!-- <fieldset style="background-color: rgb(245, 163, 11); border-radius: 20px;"> -->
+
+                        <div class="row p-3">
+                            <div class="col-lg-2 col-sm-12">
+                                <label>Full Name:</label>
+                            </div>
+                            <div class="col-lg-10 col-sm-12">
+                                <input class="input" type="text" name="name1" id="empname" />
+
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col-lg-2">
+                                <label>Email Address:</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input class="input" type="email" name="name1" id="empemail" />
+
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col-lg-2">
+                                <label>Mobile Number:</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input class="input" type="text" id="empnumber" name="name1" />
+
+                            </div>
+                        </div>
+
+                        <div class="row p-3">
+                            <div class="col-lg-2">
+                                <label>Emp Code:</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input class="input" type="text" id="empcode" name="name1" />
+                            </div>
+                        </div>
+
+                        <div class="row p-3">
+                            <div class="col-lg-2">
+                                <label>Gender:</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input class="input" type="text" id="gender" name="name1" />
+                            </div>
+                        </div>
+
+                        <div class="row p-3">
+                            <div class="col-lg-2">
+                                <label>Country:</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input class="input" type="text" id="country" name="name1" />
+                            </div>
+                        </div>
+
+                        <div class="row p-3">
+                            <div class="col-lg-2">
+                                <label for="inputState">State</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input class="input" type="text" id="state" name="name1" />
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col-lg-2">
+                                <label for="inputCity">City</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input class="input" type="text" id="empcity" name="name1" />
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col-lg-2">
+                            </div>
+                            <div class="col-lg-10">
+                                <input type="button" id=empsubmit value="SEARCH" style="margin-left: 125px;"
+                                    onclick="search()" />
+                            </div>
+                        </div>
+
+                        <!-- </fieldset> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</body>
+
+</html>
